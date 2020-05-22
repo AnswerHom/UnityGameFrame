@@ -28,6 +28,7 @@ public class ObjectPool : BaseManager<ObjectPool> {
             Pool p = new Pool(name);
             p.intoPool(obj);
             poolDic.Add(name, p);
+            //创建池子管理容器
             if(_poolObj == null)
             {
                 _poolObj = new GameObject();
@@ -90,7 +91,7 @@ public class Pool
         name = str;
         list = new List<GameObject>();
         container = new GameObject();
-        container.name = name;
+        container.name = str;
     }
 
     /// <summary>
