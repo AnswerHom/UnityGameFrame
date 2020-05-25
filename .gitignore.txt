@@ -1,0 +1,3 @@
+/UnityGameFrame/ProjectSettings
+/UnityGameFrame/Temp
+/UnityGameFrame/Library
