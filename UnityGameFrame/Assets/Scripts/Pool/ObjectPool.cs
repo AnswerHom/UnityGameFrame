@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// 对象池管理
@@ -41,17 +42,18 @@ public class ObjectPool : BaseManager<ObjectPool> {
     /// <summary>
     /// 出池
     /// </summary>
-    public GameObject outPool(string name)
+    public void outPool(string name,UnityAction<GameObject> func)
     {
         if (poolDic.ContainsKey(name) && poolDic[name].list.Count > 0)
         {
-            Pool p = poolDic[name];
-            return p.outPool();
+            func(poolDic[name].outPool());
         }else
         {
-            GameObject obj = GameObject.Instantiate(Resources.Load<GameObject>(name));
-            obj.name = name;
-            return obj;
+            ResManager.GetInstance().LoadResAsync<GameObject>(name, (obj) =>
+            {
+                obj.name = name;
+                func(obj);
+            });
         }
     }
 
