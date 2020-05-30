@@ -62,6 +62,7 @@
     <Compile Include="Assets\Scripts\AutoDestroy.cs" />
     <Compile Include="Assets\Scripts\Base\BaseManager.cs" />
     <Compile Include="Assets\Scripts\Event\EventManager.cs" />
+    <Compile Include="Assets\Scripts\Input\InputManager.cs" />
     <Compile Include="Assets\Scripts\Mono\MonoController.cs" />
     <Compile Include="Assets\Scripts\Mono\MonoManager.cs" />
     <Compile Include="Assets\Scripts\Pool\ObjectPool.cs" />

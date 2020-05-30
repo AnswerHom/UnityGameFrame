@@ -3,54 +3,122 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+public interface IEventInfo
+{
+
+}
+
+public class EventInfo<T>: IEventInfo
+{
+    public UnityAction<T> actions;
+
+    public EventInfo(UnityAction<T> action)
+    {
+        actions += action;
+    }
+}
+
+public class EventInfo : IEventInfo
+{
+    public UnityAction actions;
+
+    public EventInfo(UnityAction action)
+    {
+        actions += action;
+    }
+}
+
+
 public class EventManager : BaseManager<EventManager>
 {
-    private Dictionary<string, UnityAction<object>> eventDic;
+    private Dictionary<string, IEventInfo> eventDic;
 
     public EventManager()
     {
-        eventDic = new Dictionary<string, UnityAction<object>>();
+        eventDic = new Dictionary<string, IEventInfo>();
     }
 
     /// <summary>
-    /// 开启监听
+    /// 开启监听(有参数)
     /// </summary>
-    /// <param name="name"></param>
-    /// <param name="action"></param>
-    public void AddEventListener(string name, UnityAction<object> action)
+    /// <param name="name">事件名字</param>
+    /// <param name="action">委托</param>
+    public void AddEventListener<T>(string name, UnityAction<T> action)
     {
         if (eventDic.ContainsKey(name))
         {
-            eventDic[name] += action;
+            (eventDic[name] as EventInfo<T>).actions += action;
         }
         else
         {
-            eventDic.Add(name, action);
+            eventDic.Add(name, new EventInfo<T>(action));
         }
     }
 
     /// <summary>
-    /// 移除监听
+    /// 开启监听(无参数)
     /// </summary>
-    /// <param name="name"></param>
-    /// <param name="action"></param>
-    public void RemoveEventListener(string name ,UnityAction<object> action)
+    /// <param name="name">事件名字</param>
+    /// <param name="action">委托</param>
+    public void AddEventListener(string name, UnityAction action)
     {
         if (eventDic.ContainsKey(name))
         {
-            eventDic[name] -= action;
+            (eventDic[name] as EventInfo).actions += action;
+        }
+        else
+        {
+            eventDic.Add(name, new EventInfo(action));
         }
     }
 
     /// <summary>
-    /// 事件触发
+    /// 移除监听(有参数)
     /// </summary>
-    /// <param name="name"></param>
-    public void EventTrigger(string name , object info)
+    /// <param name="name">事件名字</param>
+    /// <param name="action">委托</param>
+    public void RemoveEventListener<T>(string name ,UnityAction<T> action)
     {
         if (eventDic.ContainsKey(name))
         {
-            eventDic[name].Invoke(info);
+            (eventDic[name] as EventInfo<T>).actions -= action;
+        }
+    }
+
+    /// <summary>
+    /// 移除监听(无参数)
+    /// </summary>
+    /// <param name="name">事件名字</param>
+    /// <param name="action">委托</param>
+    public void RemoveEventListener(string name, UnityAction action)
+    {
+        if (eventDic.ContainsKey(name))
+        {
+            (eventDic[name] as EventInfo).actions -= action;
+        }
+    }
+
+    /// <summary>
+    /// 事件触发(有参数)
+    /// </summary>
+    /// <param name="name"></param>
+    public void EventTrigger<T>(string name , T info)
+    {
+        if (eventDic.ContainsKey(name))
+        {
+            (eventDic[name] as EventInfo<T>).actions.Invoke(info);
+        }
+    }
+
+    /// <summary>
+    /// 事件触发(无参数)
+    /// </summary>
+    /// <param name="name"></param>
+    public void EventTrigger(string name)
+    {
+        if (eventDic.ContainsKey(name))
+        {
+            (eventDic[name] as EventInfo).actions.Invoke();
         }
     }
 }

@@ -6,7 +6,7 @@ public class TestPool : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        EventManager.GetInstance().AddEventListener("进度条变化", onProgress);
+        EventManager.GetInstance().AddEventListener<int>("进度条变化", onProgress);
 	}
 	
 	// Update is called once per frame
@@ -37,7 +37,7 @@ public class TestPool : MonoBehaviour {
         Debug.Log("=========> 加载完成");
     }
 
-    private void onProgress(object info)
+    private void onProgress(int info)
     {
         Debug.Log("=========> progress = " + info);
     }
