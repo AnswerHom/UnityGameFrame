@@ -6,7 +6,9 @@ public class TestPool : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        InputManager.GetInstance();
         EventManager.GetInstance().AddEventListener<int>("进度条变化", onProgress);
+        EventManager.GetInstance().AddEventListener<KeyCode>("按键按下", OnKeyDown);
 	}
 	
 	// Update is called once per frame
@@ -40,5 +42,24 @@ public class TestPool : MonoBehaviour {
     private void onProgress(int info)
     {
         Debug.Log("=========> progress = " + info);
+    }
+
+    private void OnKeyDown(KeyCode key)
+    {
+        switch (key)
+        {
+            case KeyCode.A:
+                MusicManager.GetInstance().PlayBackMusic("Bgm/backMusic");
+                break;
+            case KeyCode.D:
+                MusicManager.GetInstance().StopBackMusic();
+                break;
+            case KeyCode.W:
+                MusicManager.GetInstance().PauseBackMusic();
+                break;
+            case KeyCode.S:
+                MusicManager.GetInstance().PlaySound("Sound/sfx_Flash");
+                break;
+        }
     }
 }

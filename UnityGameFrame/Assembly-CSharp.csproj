@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\Input\InputManager.cs" />
     <Compile Include="Assets\Scripts\Mono\MonoController.cs" />
     <Compile Include="Assets\Scripts\Mono\MonoManager.cs" />
+    <Compile Include="Assets\Scripts\Music\MusicManager.cs" />
     <Compile Include="Assets\Scripts\Pool\ObjectPool.cs" />
     <Compile Include="Assets\Scripts\Res\ResManager.cs" />
     <Compile Include="Assets\Scripts\Scene\ScenesManager.cs" />

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class InputManager : BaseManager<InputManager> {
-    private bool isCheckInput = false;
+    private bool isCheckInput = true;
 
     public InputManager(){
         MonoManager.GetInstance().AddUpdateListener(InputUpdate);
@@ -16,7 +16,7 @@ public class InputManager : BaseManager<InputManager> {
 
     private void InputUpdate()
     {
-        if (isCheckInput) return;
+        if (!isCheckInput) return;
         checkInput(KeyCode.W);
         checkInput(KeyCode.S);
         checkInput(KeyCode.A);
