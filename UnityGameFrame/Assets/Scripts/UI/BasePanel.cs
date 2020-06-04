@@ -44,11 +44,10 @@ public class BasePanel : MonoBehaviour {
     protected void FindChildControl<T>() where T:UIBehaviour
     {
         T[] controls = GetComponentsInChildren<T>();
-        string name;
         for (int i = 0; i < controls.Length; i++)
         {
             T control = controls[i];
-            name = control.gameObject.name;
+            string name = control.gameObject.name;
             if (controlDic.ContainsKey(name))
             {
                 controlDic[name].Add(control);

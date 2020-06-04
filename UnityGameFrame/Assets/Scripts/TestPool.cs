@@ -55,10 +55,10 @@ public class TestPool : MonoBehaviour {
                 MusicManager.GetInstance().StopBackMusic();
                 break;
             case KeyCode.W:
-                MusicManager.GetInstance().PauseBackMusic();
+                UIManager.GetInstance().HidePanel("LoginPanel");
                 break;
             case KeyCode.S:
-                MusicManager.GetInstance().PlaySound("Sound/sfx_Flash");
+                UIManager.GetInstance().ShowPanel<LoginPanel>("LoginPanel", UILayer.BOTTOM);
                 break;
         }
     }

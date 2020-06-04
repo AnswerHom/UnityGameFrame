@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\Scene\ScenesManager.cs" />
     <Compile Include="Assets\Scripts\TestPool.cs" />
     <Compile Include="Assets\Scripts\UI\BasePanel.cs" />
+    <Compile Include="Assets\Scripts\UI\LoginPanel.cs" />
     <Compile Include="Assets\Scripts\UI\UIManager.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>F:/UnityPro/MyGit/UnityGameFrame/UnityGameFrame/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>

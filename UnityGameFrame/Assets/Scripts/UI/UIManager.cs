@@ -72,7 +72,7 @@ public class UIManager : BaseManager<UIManager> {
         }
         else
         {
-            ResManager.GetInstance().LoadResAsync<GameObject>("UI" + name, (obj) =>
+            ResManager.GetInstance().LoadResAsync<GameObject>("UI/" + name, (obj) =>
             {
                 Transform parent = GetLayerFather(layer);
                 obj.transform.SetParent(parent);
